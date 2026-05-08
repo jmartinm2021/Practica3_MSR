@@ -10,7 +10,12 @@ Practica 3 de modelado y simulacion de robots: gazebo + rviz + ros2 + moveit
   
 ### Video de la demostracion de la Parte A  
 [![Video de la Parte A](https://img.youtube.com/vi/0tbewH5eLeE/0.jpg)](https://youtu.be/0tbewH5eLeE)
-  
-video de la parte B
 
+### Imagen arbol de links  
+Separe los frames normativos (para control y navegacion) de los visuales (para apariencia), colgando estos ultimos de los primeros mediante joints fijos, para cumplir REP-103 sin alterar los meshes originales.  
+  
+![Imagen links](https://github.com/jmartinm2021/Practica3_MSR/blob/main/media/frames_2026-05-04_17.28.16.pdf)  
+
+## Parte B
+### Video de la demostracion de la Parte B  
 [![Video de la Parte B](https://img.youtube.com/vi/xcdt0nWppis/0.jpg)](https://youtu.be/xcdt0nWppis)
