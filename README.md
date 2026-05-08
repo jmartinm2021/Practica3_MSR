@@ -19,3 +19,13 @@ Separe los frames normativos (para control y navegacion) de los visuales (para a
 ## Parte B
 ### Video de la demostracion de la Parte B  
 [![Video de la Parte B](https://img.youtube.com/vi/xcdt0nWppis/0.jpg)](https://youtu.be/xcdt0nWppis)
+
+### Graficas
+#### Grafica G Parcial vs Tiempo  
+![Grafica vs G](https://github.com/jmartinm2021/Practica3_MSR/blob/main/media/grafica_gasto_parcial.png)  
+
+### Grafica Posicion de las Ruedas vs Tiempo
+![Grafica vs Pos](https://github.com/jmartinm2021/Practica3_MSR/blob/main/media/grafica_posicion_ruedas.png)  
+
+### Grafica Aceleracion vs Tiempo
+![Grafica vs Acc](https://github.com/jmartinm2021/Practica3_MSR/blob/main/media/grafica_aceleracion_imu.png)  
