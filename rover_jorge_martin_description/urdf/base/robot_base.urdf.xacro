@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="rover_base" 
+               params="prefix 
+                       chasis_mass:=75.0 
+                       chasis_ixx:=0.002 
+                       chasis_iyy:=0.002 
+                       chasis_izz:=0.002
+                       imu_topic:=/imu
+                       camera_topic:=/camera/image
+                       camera_width:=640
+                       camera_height:=480
+                       camera_fov:=1.39626">
+    
+    <link name="${prefix}Root"/>
+
+    <link name="${prefix}Chasis_visual">
+      <collision name="${prefix}Chasis_collision_1">
+        <origin rpy="0 0 0" xyz="0 -1.44233 -0.12967"/>
+        <geometry>
+          <box size="2.20000 1.08467 1.20000"/>
+        </geometry>
+      </collision>
+      <collision name="${prefix}Chasis_collision_2">
+        <origin rpy="0 0 0" xyz="0 1.45830 -0.12967"/>
+        <geometry>
+          <box size="2.20000 1.11661 1.20000"/>
+        </geometry>
+      </collision>
+      <collision name="${prefix}Chasis_collision_3">
+        <origin rpy="0 0 0" xyz="0.80174 0 -0.12967"/>
+        <geometry>
+          <box size="0.80348 4.00000 1.20000"/>
+        </geometry>
+      </collision>
+      <collision name="${prefix}Chasis_collision_4">
+        <origin rpy="0 0 0" xyz="-0.73049 0 -0.12967"/>
+        <geometry>
+          <box size="0.71767 4.00000 1.20000"/>
+        </geometry>
+      </collision>
+      <collision name="${prefix}Chasis_collision_5">
+        <origin rpy="0 0 0" xyz="0 0 -0.52825"/>
+        <geometry>
+          <box size="2.20000 4.00000 0.42160"/>
+        </geometry>
+      </collision>
+      
+      <inertial>
+        <inertia ixx="${chasis_ixx}" ixy="0" ixz="0" iyy="${chasis_iyy}" iyz="0" izz="${chasis_izz}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${chasis_mass}"/>
+      </inertial>
+      
+      <visual name="${prefix}Chasis_visual_mesh">
+        <material name="${prefix}Chasis_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Cube.017.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Suspension_I_visual">
+      <visual name="${prefix}Suspension_I_visual_mesh">
+        <material name="${prefix}Suspension_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Cylinder.007.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Suspension_D_visual">
+      <visual name="${prefix}Suspension_D_visual_mesh">
+        <material name="${prefix}Suspension_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Cylinder.013.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Chasis_link"/>
+    <link name="${prefix}Suspension_I_link"/>
+    <link name="${prefix}Suspension_D_link"/>
+
+    <link name="${prefix}imu_link">
+      <visual name="${prefix}imu_visual">
+        <material name="${prefix}imu_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}front_camera_frame">
+      <visual name="${prefix}front_camera_visual">
+        <material name="${prefix}camera_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="0.08 0.05 0.05"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}Chasis_visual_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Chasis_visual"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Suspension_I_visual_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Suspension_I_visual"/>
+      <origin rpy="0 0 0" xyz="0.58736 -0.18962 -0.20712"/>
+    </joint>
+
+    <joint name="${prefix}Suspension_D_visual_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Suspension_D_visual"/>
+      <origin rpy="0 0 0" xyz="-0.58736 0.18962 -0.20712"/>
+    </joint>
+
+    <joint name="${prefix}Chasis_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Chasis_link"/>
+      <origin rpy="0 0 -1.5708" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Suspension_I_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Suspension_I_link"/>
+      <origin rpy="0 0 -1.5708" xyz="0.58736 -0.18962 -0.20712"/>
+    </joint>
+
+    <joint name="${prefix}Suspension_D_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Suspension_D_link"/>
+      <origin rpy="0 0 -1.5708" xyz="-0.58736 0.18962 -0.20712"/>
+    </joint>
+
+    <joint name="${prefix}imu_joint" type="fixed">
+      <parent link="${prefix}Chasis_link"/>
+      <child link="${prefix}imu_link"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}front_camera_joint" type="fixed">
+      <parent link="${prefix}Chasis_link"/>
+      <child link="${prefix}front_camera_frame"/>
+      <origin rpy="0 0 0" xyz="1.9 0 0"/>
+    </joint>
+
+    <gazebo reference="${prefix}imu_link">
+      <sensor name="${prefix}imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <topic>${imu_topic}</topic>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+
+    <gazebo reference="${prefix}front_camera_frame">
+      <sensor name="${prefix}front_camera" type="camera">
+        <visualize>true</visualize>
+        <update_rate>30</update_rate>
+        <topic>${camera_topic}</topic>
+        <camera>
+          <horizontal_fov>${camera_fov}</horizontal_fov>
+          <image>
+            <width>${camera_width}</width>
+            <height>${camera_height}</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.10</near>
+            <far>15.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+          <optical_frame_id>${prefix}front_camera_frame</optical_frame_id>
+        </camera>
+      </sensor>
+    </gazebo>
+
+    <material name="${prefix}Chasis_material">
+      <color rgba="0.69804 0.74902 0.49412 1.0"/>
+    </material>
+    
+    <material name="${prefix}Suspension_material">
+      <color rgba="0.19608 0.19608 0.19608 1.0"/>
+    </material>
+
+    <material name="${prefix}imu_material">
+      <color rgba="1.0 0.0 0.0 1.0"/>
+    </material>
+
+    <material name="${prefix}camera_material">
+      <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+
+  </xacro:macro>
+
+</robot>

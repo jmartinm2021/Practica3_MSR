@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover_jorge_martin">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import rover_jorge_martin urdf file -->
+    <xacro:include filename="$(find rover_jorge_martin_description)/robots/rover.urdf.xacro" />
+
+    <xacro:include filename="rover_jorge_martin.srdf" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="rover_jorge_martin.ros2_control.xacro" />
+
+
+    <xacro:rover_jorge_martin_ros2_control name="ScaraArm" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

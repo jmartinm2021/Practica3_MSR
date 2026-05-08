@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="rover_jorge_martin" xmlns:xacro="http://wiki.ros.org/xacro">
+  
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/base/robot_base.urdf.xacro"/>
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/scara/robot_scara.urdf.xacro"/>
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/ruedas/robot_ruedas.urdf.xacro"/>
+  
+  <link name="base_footprint"/>
+  <link name="base_link"/>
+
+  <joint name="base_footprint_to_base_link" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 1.025"/>
+  </joint>
+
+  <joint name="base_link_to_root" type="fixed">
+    <parent link="base_link"/>
+    <child link="rover_Root"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <xacro:rover_base prefix="rover_" 
+                    chasis_mass="100.0" 
+                    imu_topic="/rover/imu/data"
+                    camera_topic="/rover/front_camera/image_raw"
+                    camera_width="640"
+                    camera_height="480"
+                    camera_fov="1.39626"/>
+  
+  <xacro:robot_scara prefix="rover_" 
+                     ee_camera_topic="/rover/ee_camera/image_raw"
+                     ee_camera_width="640"
+                     ee_camera_height="480"
+                     ee_camera_fov="1.39626"/>
+                     
+  <xacro:robot_ruedas prefix="rover_"/>
+
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/ros2_control.urdf.xacro"/>
+  <xacro:ros2_control config_controllers="$(find rover_jorge_martin_description)/config/rover_controllers.yaml"/>
+  
+</robot>

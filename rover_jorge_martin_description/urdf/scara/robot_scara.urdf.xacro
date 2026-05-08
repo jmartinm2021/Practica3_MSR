@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/scara/brazo_scara.urdf.xacro"/>
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/scara/mano_scara.urdf.xacro"/>
+
+  <xacro:macro name="robot_scara" 
+               params="prefix
+                       brazo1_mass:=5.0
+                       brazo2_mass:=5.0
+                       brazo3_mass:=6.0
+                       brazo4_mass:=6.0
+                       muneca_mass:=2.0
+                       dedo_mass:=0.5
+                       ee_camera_topic:=/ee_camera/image
+                       ee_camera_width:=640
+                       ee_camera_height:=480
+                       ee_camera_fov:=1.39626">
+    
+    <xacro:brazo_scara prefix="${prefix}"
+                       brazo1_mass="${brazo1_mass}"
+                       brazo2_mass="${brazo2_mass}"
+                       brazo3_mass="${brazo3_mass}"
+                       brazo4_mass="${brazo4_mass}"/>
+
+    <xacro:mano_scara prefix="${prefix}"
+                      muneca_mass="${muneca_mass}"
+                      dedo_mass="${dedo_mass}"
+                      ee_camera_topic="${ee_camera_topic}"
+                      ee_camera_width="${ee_camera_width}"
+                      ee_camera_height="${ee_camera_height}"
+                      ee_camera_fov="${ee_camera_fov}"/>
+
+  </xacro:macro>
+
+</robot>

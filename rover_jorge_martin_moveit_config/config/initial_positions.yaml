@@ -1,0 +1,9 @@
+# Default initial positions for rover_jorge_martin's ros2_control fake system
+
+initial_positions:
+  rover_Brazo2_link_joint: 0
+  rover_Brazo3_link_joint: 0
+  rover_Brazo4_link_joint: 0
+  rover_Dedo_drch_link_joint: 0
+  rover_Dedo_izq_link_joint: 0
+  rover_Muneca_link_joint: 0

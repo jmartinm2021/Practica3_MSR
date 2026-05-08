@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="brazo_scara" 
+               params="prefix
+                       brazo1_mass:=5.0
+                       brazo2_mass:=5.0
+                       brazo3_mass:=6.0
+                       brazo4_mass:=6.0">
+    
+    <link name="${prefix}Brazo1_visual">
+      <collision name="${prefix}Brazo1_collision">
+        <origin rpy="0 0 0" xyz="0 0 0.60000"/>
+        <geometry><cylinder radius="0.25000" length="1.20000"/></geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.66448" ixy="0" ixz="0" iyy="0.66448" iyz="0" izz="0.07703"/>
+        <origin rpy="0 0 0" xyz="0 0 0.49000"/>
+        <mass value="${brazo1_mass}"/>
+      </inertial>
+      <visual name="${prefix}Brazo1_visual_mesh">
+        <material name="${prefix}Brazo1_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0.65000"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Circle.001.dae" scale="0.125 0.125 0.12602"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Brazo2_visual">
+      <collision name="${prefix}Brazo2_collision">
+        <origin rpy="0 0 0" xyz="0 -0.56010 0.07193"/>
+        <geometry><box size="0.25000 1.12500 0.40000"/></geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="1.07924" ixy="0" ixz="0" iyy="0.08347" iyz="0.14296" izz="1.04413"/>
+        <origin rpy="0 0 0" xyz="0 -0.64033 0"/>
+        <mass value="${brazo2_mass}"/>
+      </inertial>
+      <visual name="${prefix}Brazo2_visual_mesh">
+        <material name="${prefix}Brazo2_material"/>
+        <origin rpy="0 0 0" xyz="0 -0.64033 0"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Cube.012.dae" scale="0.125 0.500 0.100"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Brazo3_visual">
+      <collision name="${prefix}Brazo3_collision">
+        <origin rpy="0 0 0" xyz="0 -0.56250 0"/>
+        <geometry><box size="0.25000 1.12500 0.60000"/></geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="1.15753" ixy="0" ixz="0" iyy="0.10738" iyz="0" izz="1.10677"/>
+        <origin rpy="0 0 0" xyz="0 -0.68460 0"/>
+        <mass value="${brazo3_mass}"/>
+      </inertial>
+      <visual name="${prefix}Brazo3_visual_mesh">
+        <material name="${prefix}Brazo3_material"/>
+        <origin rpy="0 0 0" xyz="0 -0.68460 0"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Circle.004.dae" scale="0.125 0.125 3.0"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Brazo4_visual">
+      <collision name="${prefix}Brazo4_collision">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.08000" length="3.00000"/></geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="4.50954" ixy="0" ixz="0" iyy="4.50954" iyz="0" izz="0.01908"/>
+        <origin rpy="0 0 0" xyz="0 0 0.00232"/>
+        <mass value="${brazo4_mass}"/>
+      </inertial>
+      <visual name="${prefix}Brazo4_visual_mesh">
+        <material name="${prefix}Brazo4_material"/>
+        <origin rpy="0 0 0" xyz="0 0 0.00232"/>
+        <geometry>
+          <mesh filename="file:///home/longas/.gz/sim/models/rover_jorge_martin_description/meshes/dae/Circle.010.dae" scale="0.080 0.080 15.00001"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="${prefix}Brazo1_link"/>
+    <link name="${prefix}Brazo2_link"/>
+    <link name="${prefix}Brazo3_link"/>
+    <link name="${prefix}Brazo4_link"/>
+
+    <joint name="${prefix}Brazo1_visual_joint" type="fixed">
+      <parent link="${prefix}Brazo1_link"/>
+      <child link="${prefix}Brazo1_visual"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Brazo2_visual_joint" type="fixed">
+      <parent link="${prefix}Brazo2_link"/>
+      <child link="${prefix}Brazo2_visual"/>
+      <origin rpy="0 0 1.5707" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Brazo3_visual_joint" type="fixed">
+      <parent link="${prefix}Brazo3_link"/>
+      <child link="${prefix}Brazo3_visual"/>
+      <origin rpy="0 0 1.5707" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Brazo4_visual_joint" type="fixed">
+      <parent link="${prefix}Brazo4_link"/>
+      <child link="${prefix}Brazo4_visual"/>
+      <origin rpy="0 0 1.5707" xyz="0 0 0"/>
+    </joint>
+
+    <joint name="${prefix}Brazo1_link_joint" type="fixed">
+      <parent link="${prefix}Root"/>
+      <child link="${prefix}Brazo1_link"/>
+      <origin rpy="0 0 -1.5708" xyz="0 -1.20000 0.42033"/>
+    </joint>
+
+    <joint name="${prefix}Brazo2_link_joint" type="revolute">
+      <limit lower="-3.15000" upper="3.15000" effort="200.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 1.12807"/>
+      <parent link="${prefix}Brazo1_link"/>
+      <child link="${prefix}Brazo2_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="${prefix}Brazo3_link_joint" type="revolute">
+      <limit lower="-3.15000" upper="3.15000" effort="200.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="1.00000 0 0.17193"/>
+      <parent link="${prefix}Brazo2_link"/>
+      <child link="${prefix}Brazo3_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="${prefix}Brazo4_link_joint" type="prismatic">
+      <limit lower="-3.15000" upper="0" effort="200.0" velocity="1.0"/>
+      <origin rpy="0 0 0" xyz="1.00000 0 1.14982"/>
+      <parent link="${prefix}Brazo3_link"/>
+      <child link="${prefix}Brazo4_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <material name="${prefix}Brazo1_material">
+      <color rgba="0.57647 0.57647 0.57647 1.0"/>
+    </material>
+    <material name="${prefix}Brazo2_material">
+      <color rgba="0.57647 0.57647 0.57647 1.0"/>
+    </material>
+    <material name="${prefix}Brazo3_material">
+      <color rgba="0.57647 0.57647 0.57647 1.0"/>
+    </material>
+    <material name="${prefix}Brazo4_material">
+      <color rgba="0.28627 0.23922 0.25882 1.0"/>
+    </material>
+
+  </xacro:macro>
+
+</robot>

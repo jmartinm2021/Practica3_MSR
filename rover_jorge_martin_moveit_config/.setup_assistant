@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: rover_jorge_martin_description
+    relative_path: robots/rover.urdf.xacro
+  srdf:
+    relative_path: config/rover_jorge_martin.srdf
+  package_settings:
+    author_name: Jorge Martin
+    author_email: j.martrinm.2021@alumnos.urjc.es
+    generated_timestamp: 1778054972
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

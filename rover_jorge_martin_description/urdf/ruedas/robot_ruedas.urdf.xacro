@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find rover_jorge_martin_description)/urdf/ruedas/rueda.urdf.xacro"/>
+
+  <xacro:macro name="robot_ruedas" params="prefix">
+    
+    
+    <xacro:rueda name="${prefix}Rueda_1_I"
+                 parent_link="${prefix}Suspension_I_link"
+                 xyz="-1.80612 0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+    
+    <xacro:rueda name="${prefix}Rueda_2_I"
+                 parent_link="${prefix}Suspension_I_link"
+                 xyz="-0.18962 0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+    
+    <xacro:rueda name="${prefix}Rueda_3_I"
+                 parent_link="${prefix}Suspension_I_link"
+                 xyz="1.42228 0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+    
+    <xacro:rueda name="${prefix}Rueda_1_D"
+                 parent_link="${prefix}Suspension_D_link"
+                 xyz="1.80152 -0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+    
+    <xacro:rueda name="${prefix}Rueda_2_D"
+                 parent_link="${prefix}Suspension_D_link"
+                 xyz="0.18962 -0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+    
+    <xacro:rueda name="${prefix}Rueda_3_D"
+                 parent_link="${prefix}Suspension_D_link"
+                 xyz="-1.42228 -0.27836 -0.44898"
+                 rpy="-1.5708 0 0"/>
+
+  </xacro:macro>
+
+</robot>
